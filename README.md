@@ -1,0 +1,3 @@
+# dataStructure
+
+This repository contains data structure examples, Big O notation, implementation, notes, etc...
