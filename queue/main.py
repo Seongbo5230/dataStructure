@@ -88,10 +88,50 @@ class WallsAndGates:
                     rooms[I][J] = rooms[i][j] + 1
                     q += (I, J)
 
+# Need to come back to this one...
+# https://www.python-course.eu/python3_lambda.php
+class NumberOfIslands:
+    def numIslands(self, grid):
+        def sink(i, j):
+            if 0 <= i < len(grid) and 0 <= j < len(grid[i]) and grid[i][j] == '1':
+                grid[i][j] = '0'
+                list(map(sink, (i+1, i-1, i, i), (j, j, j+1, j-1)))
+                return 1
+            return 0
+        return sum(sink(i, j) for i in range(len(grid)) for j in range(len(grid[i])))
 
-# Your MovingAverage object will be instantiated and called as such:
-# obj = MovingAverage(size)
-# param_1 = obj.next(val)
+# Need to come back to this one...
+class OpenTheLock:
+    def openTheLock(self, lock):
+        return None
+
+# Need to come back to this one...
+class PerfectSquare:
+    def numSquares(self, n): # n is int, return type is int
+        if n < 2:
+            return n
+
+        list = []
+        i = 1
+        while i * i <= n:
+            list.append(i * i)
+            i += 1
+        count = 0
+        dict = {n}
+
+        while dict:
+            count += 1
+            temp = set()
+            for x in dict:
+                for y in list:
+                    if x == y:
+                        return count
+                    if x < y:
+                        break
+                    temp.add(x - y)
+            dict = temp
+
+        return count
 
 def main():
     #########################
@@ -151,15 +191,47 @@ def main():
     ########################
     # Moving Avg Test Case #
     ########################
-    obj = MovingAverage(10)
-    result = obj.next(5)
-    print(result)
-    result = obj.next(10)
-    print(result)
-    result = obj.next(50)
-    print(result)
-    result = obj.next(100)
-    print(result)
+    # obj = MovingAverage(10)
+    # result = obj.next(5)
+    # print(result)
+    # result = obj.next(10)
+    # print(result)
+    # result = obj.next(50)
+    # print(result)
+    # result = obj.next(100)
+    # print(result)
+
+    ###############################
+    # Number of Islands Test Case #
+    ###############################
+    # obj = NumberOfIslands()
+    # grid1 = [["1","1","1","1","0"],
+    #          ["1","1","0","1","0"],
+    #          ["1","1","0","0","0"],
+    #          ["0","0","0","0","0"]]
+    # result = obj.numIslands(grid1) # 1
+    # print(result)
+    # print("Should be 1")
+    #
+    # grid2 = [["1","1","0","0","0"],
+    #          ["1","1","0","0","0"],
+    #          ["0","0","1","0","0"],
+    #          ["0","0","0","1","1"]]
+    # result = obj.numIslands(grid2) # 3
+    # print(result)
+    # print("Should be 3")
+
+    #############################
+    # Perfect Squares Test Case #
+    #############################
+    obj = PerfectSquare()
+    answer = obj.numSquares(12)
+    print(answer)
+    print("Should be 3")
+
+    answer = obj.numSquares(13)
+    print(answer)
+    print("Should be 2")
 
 if __name__ == "__main__":
     main()
